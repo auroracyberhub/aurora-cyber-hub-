@@ -73,7 +73,15 @@
     font-weight:600; font-size:0.88rem; text-decoration:none; white-space:nowrap;
   }
   .nav-links-desktop{display:flex; align-items:center; gap:32px;}
-  @media (max-width:800px){ .nav-links-desktop ul{display:none;} }
+  .menu-btn{display:none; background:none; border:1px solid var(--line); color:var(--white); padding:8px 12px; border-radius:var(--radius); font-family:'IBM Plex Mono',monospace; font-size:0.8rem; cursor:pointer;}
+  .mobile-menu{display:none; flex-direction:column; padding:8px 0 20px; border-bottom:1px solid var(--line);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 0; color:var(--grey); text-decoration:none; font-size:0.95rem; border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  @media (max-width:800px){
+    .nav-links-desktop ul{display:none;}
+    .menu-btn{display:inline-block;}
+  }
 
   .hero{
     position:relative;
@@ -142,19 +150,8 @@
   .board-row .code{color:var(--cyan); font-weight:500;}
   .board-row .route{color:var(--white);}
   .board-row .route small{display:block; color:var(--grey); font-size:0.72rem; margin-top:2px;}
-  .flip{
-    display:inline-block; overflow:hidden; height:1.2em; position:relative;
-  }
-  .flip-inner{
-    display:flex; flex-direction:column;
-    animation: flipcycle 9s steps(1) infinite;
-  }
-  .flip-inner span{height:1.2em; display:flex; align-items:center;}
-  @keyframes flipcycle{
-    0%,30%{transform:translateY(0);}
-    33%,63%{transform:translateY(-1.2em);}
-    66%,96%{transform:translateY(-2.4em);}
-    100%{transform:translateY(0);}
+  .status-badge{
+    display:inline-flex; align-items:center; white-space:nowrap;
   }
   .status-amber{color:var(--amber);}
   .status-cyan{color:var(--cyan);}
@@ -185,28 +182,6 @@
   .service-map{
     border:1px solid var(--line); border-radius:4px; padding:32px; background:var(--ink-2);
     position:relative;
-  }
-  .radar{
-    position:relative; width:100%; aspect-ratio:16/9; border-radius:3px;
-    background:
-      linear-gradient(var(--line) 1px, transparent 1px) 0 0/40px 40px,
-      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/40px 40px,
-      var(--ink);
-    overflow:hidden;
-  }
-  .radar .pulse{
-    position:absolute; width:14px; height:14px; border-radius:50%;
-    background:var(--cyan); top:38%; left:62%;
-    box-shadow:0 0 0 0 rgba(77,227,193,0.6);
-    animation:pulse 2.6s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(77,227,193,0.5);}
-    70%{box-shadow:0 0 0 30px rgba(77,227,193,0);}
-    100%{box-shadow:0 0 0 0 rgba(77,227,193,0);}
-  }
-  .radar .label-pin{
-    position:absolute; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--grey);
   }
   .zones{display:flex; gap:10px; flex-wrap:wrap; margin-top:22px;}
   .zone-tag{
@@ -275,7 +250,15 @@
       </ul>
       <a href="#waitlist" class="nav-cta">Join Waitlist</a>
     </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">MENU</button>
   </nav>
+  <div class="wrap mobile-menu" id="mobileMenu">
+    <a href="#vision">Vision</a>
+    <a href="#service-area">Service Area</a>
+    <a href="#how">How It Works</a>
+    <a href="#partnership">Partnership</a>
+    <a href="#waitlist">Join Waitlist</a>
+  </div>
 </header>
 
 <main id="top">
@@ -298,19 +281,19 @@
         <div class="board-row">
           <span class="code">DIA</span>
           <span class="route">Denver International Airport Corridor<small>Aurora, CO · Tower Rd / Green Valley Ranch</small></span>
-          <span class="flip status-amber"><span class="flip-inner"><span>Pre-Launch</span><span>Site Selection</span><span>Infrastructure</span></span></span>
+          <span class="status-badge status-amber">Pre-Launch</span>
           <span class="eta mono">Q4 2026 – Q2 2027</span>
         </div>
         <div class="board-row">
           <span class="code">CHG</span>
           <span class="route">Charging Hub Buildout<small>Concrete pad + DCFC infrastructure</small></span>
-          <span class="flip status-cyan"><span class="flip-inner"><span>Planning</span><span>Permitting</span><span>Planning</span></span></span>
+          <span class="status-badge status-cyan">Planning</span>
           <span class="eta mono">In Progress</span>
         </div>
         <div class="board-row">
           <span class="code">TSL</span>
           <span class="route">Tesla Fleet Partnership<small>Cybercab supply discussions</small></span>
-          <span class="flip status-grey"><span class="flip-inner"><span>Outreach Sent</span><span>Awaiting Reply</span><span>Outreach Sent</span></span></span>
+          <span class="status-badge status-grey">Awaiting Reply</span>
           <span class="eta mono">Pending</span>
         </div>
       </div>
@@ -349,13 +332,13 @@
         <p>Site selection is focused on Aurora's Airport District, I-1 and I-2 zoned parcels — chosen for direct highway access to DIA and clearance from the 300-ft residential buffer.</p>
       </div>
       <div class="service-map">
-        <div class="radar">
-          <div class="pulse"></div>
-          <span class="label-pin" style="top:10%; left:8%;">TOWER RD</span>
-          <span class="label-pin" style="top:70%; left:12%;">GREEN VALLEY RANCH</span>
-          <span class="label-pin" style="top:12%; left:70%;">DEN — DIA</span>
-          <span class="label-pin" style="top:85%; left:66%;">AURORA, CO</span>
-        </div>
+        <iframe
+          title="Aurora CyberHub service area map — DIA corridor, Aurora, Colorado"
+          src="https://maps.google.com/maps?q=Aurora,+CO+near+Denver+International+Airport&z=11&output=embed"
+          style="width:100%; aspect-ratio:16/9; border:0; border-radius:3px; filter:saturate(0.85) contrast(1.05);"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
         <div class="zones">
           <span class="zone-tag">Zoning: I-1 / I-2 / Airport District</span>
           <span class="zone-tag">300-ft residential buffer enforced</span>
@@ -454,6 +437,15 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', function(){
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+  });
+
   const form = document.getElementById('waitlistForm');
   const success = document.getElementById('wl-success');
   form.addEventListener('submit', function(e){
@@ -464,4 +456,4 @@
 </script>
 
 </body>
-  </html>
+</html>
