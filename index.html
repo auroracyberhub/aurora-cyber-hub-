@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aurora CyberHub — Autonomous EV Fleet & Charging Hub | DIA Corridor, Colorado</title>
 <meta name="description" content="Aurora CyberHub is building the autonomous EV rideshare and charging infrastructure serving the Denver International Airport corridor in Aurora, Colorado. Join the waitlist.">
+<link rel="icon" type="image/png" href="logo-icon.png">
+<link rel="apple-touch-icon" href="logo-icon.png">
+<link rel="canonical" href="https://auroracyberhub.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aurora CyberHub — Autonomous EV Fleet & Charging Hub">
+<meta property="og:description" content="Autonomous EV rides and charging infrastructure for the Denver International Airport corridor. Join the waitlist.">
+<meta property="og:url" content="https://auroracyberhub.com/">
+<meta property="og:image" content="https://auroracyberhub.com/logo-full.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aurora CyberHub — Autonomous EV Fleet & Charging Hub">
+<meta name="twitter:description" content="Autonomous EV rides and charging infrastructure for the Denver International Airport corridor. Join the waitlist.">
+<meta name="twitter:image" content="https://auroracyberhub.com/logo-full.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -61,7 +73,6 @@
     font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem;
     text-decoration:none; letter-spacing:0.01em;
   }
-  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan);}
   nav ul{list-style:none; display:flex; gap:32px; margin:0; padding:0;}
   nav ul a{
     text-decoration:none; color:var(--grey); font-size:0.92rem; font-weight:500;
@@ -93,18 +104,13 @@
       var(--ink);
     border-bottom:1px solid var(--line);
   }
-  .hero::before{
-    content:'';
-    position:absolute;
-    top:-10%; right:-8%;
-    width:640px; height:640px;
-    max-width:70vw; max-height:70vw;
-    background:url('logo-icon.png') no-repeat center/contain;
-    opacity:0.07;
-    pointer-events:none;
-    z-index:0;
+  .hero-logo{
+    display:block;
+    height:120px; width:auto;
+    margin-bottom:32px;
+    filter:drop-shadow(0 0 24px rgba(77,227,193,0.15));
   }
-  .hero .wrap{position:relative; z-index:1;}
+  @media (max-width:640px){ .hero-logo{height:88px;} }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
     font-family:'IBM Plex Mono',monospace; font-size:0.78rem; letter-spacing:0.08em;
@@ -173,7 +179,7 @@
     .board-row .eta{display:none;}
   }
 
-  section{padding:88px 0;}
+  section{padding:88px 0; scroll-margin-top:80px;}
   .section-head{max-width:640px; margin-bottom:52px;}
   .section-label{
     font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--cyan);
@@ -275,8 +281,9 @@
 
 <main id="top">
 
-  <section class="hero" style="padding-top:96px;">
+  <section class="hero">
     <div class="wrap">
+      <img src="logo-icon.png" alt="Aurora CyberHub" class="hero-logo">
       <span class="eyebrow">Aurora, Colorado · DIA Corridor</span>
       <h1>Autonomous EV rides,<br><span>built for the airport corridor.</span></h1>
       <p class="lede">Aurora CyberHub is standing up the autonomous rideshare and EV charging infrastructure serving Denver International Airport — ready the moment Colorado deployment opens.</p>
@@ -426,7 +433,7 @@
 <footer>
   <div class="wrap footer-grid">
     <div class="footer-col">
-      <a href="#top" class="brand"><img src="logo-full.png" alt="Aurora CyberHub — autonomous EV fleet and charging hub" style="height:110px; width:auto; display:block;"></a>
+      <a href="#top" class="brand"><img src="logo-full.png" alt="Aurora CyberHub — autonomous EV fleet and charging hub" loading="lazy" style="height:110px; width:auto; display:block;"></a>
       <p>Autonomous EV rideshare & charging infrastructure for the Denver International Airport corridor.</p>
     </div>
     <div class="footer-col">
