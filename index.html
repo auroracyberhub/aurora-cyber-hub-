@@ -97,12 +97,35 @@
   .calc-head{display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--rule); padding-bottom:14px; margin-bottom:20px;}
   .calc-head span:first-child{font-family:'JetBrains Mono',monospace; font-size:0.7rem; letter-spacing:0.13em; text-transform:uppercase; color:var(--muted);}
   .calc-head span:last-child{font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--mint);}
-  .calc label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.88rem; color:var(--muted); margin-bottom:10px;}
+  .calc label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.88rem; color:var(--muted); margin-bottom:6px;}
   .calc label b{font-family:'JetBrains Mono',monospace; color:var(--bone); font-size:1.02rem; font-weight:500;}
-  input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:3px; background:var(--asphalt-3); border-radius:2px; outline:none; margin:0 0 6px;}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:var(--sodium); cursor:pointer; border:3px solid var(--asphalt-2); box-shadow:0 0 0 1px var(--sodium);}
-  input[type=range]::-moz-range-thumb{width:22px; height:22px; border-radius:50%; background:var(--sodium); cursor:pointer; border:3px solid var(--asphalt-2); box-shadow:0 0 0 1px var(--sodium);}
-  .scale{display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--muted); margin-bottom:22px;}
+
+  input[type=range]{
+    -webkit-appearance:none; appearance:none;
+    width:100%; height:36px; background:transparent;
+    outline:none; margin:0; padding:0; cursor:pointer;
+    touch-action:none;
+  }
+  input[type=range]::-webkit-slider-runnable-track{
+    height:4px; background:var(--asphalt-3); border-radius:2px; border:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:26px; height:26px; border-radius:50%; margin-top:-11px;
+    background:var(--sodium); cursor:pointer;
+    border:3px solid var(--asphalt-2); box-shadow:0 0 0 1px var(--sodium);
+  }
+  input[type=range]::-moz-range-track{
+    height:4px; background:var(--asphalt-3); border-radius:2px; border:none;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:26px; height:26px; border-radius:50%;
+    background:var(--sodium); cursor:pointer;
+    border:3px solid var(--asphalt-2); box-shadow:0 0 0 1px var(--sodium);
+  }
+  input[type=range]:active::-webkit-slider-thumb{transform:scale(1.08);}
+
+  .scale{display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--muted); margin-bottom:20px;}
   .bar-row{margin-bottom:16px;}
   .bar-label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.86rem; margin-bottom:7px;}
   .bar-label span:first-child{color:var(--muted);}
@@ -527,3 +550,126 @@
             <input type="text" name="organization" placeholder="Company or program" required aria-label="Company or program">
             <input type="email" name="email" placeholder="Work email" required aria-label="Work email">
             <input type="text" name="requirement" placeholder="Requirement — vehicles, charging type, timeline" aria-label="Requirement">
+            <button type="submit" class="btn btn-solid">Send inquiry</button>
+          </form>
+          <div class="ok" id="fl-ok">✓ Received. We'll reply within one business day.</div>
+          <p class="fine">Goes to both founders directly. Never shared or sold.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="investors" class="band">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">Investors &amp; partners</span>
+        <h2>The scarce thing isn't chargers. It's ground.</h2>
+        <p class="lede">Aurora CyberHub LLC is a Colorado, member-managed company assembling site control, power, and permits in the DIA corridor — earning from drivers and fleets today, and positioned for depot services and fleet operation as autonomy scales into this metro. We validate demand before committing capital, and we publish what we don't yet know.</p>
+        <a href="mailto:info@auroracyberhub.com?subject=Investor%20overview%20request" class="btn btn-solid" style="margin-top:26px;">Request the plan</a>
+      </div>
+      <div class="facts">
+        <div><b>Aurora CyberHub LLC</b><p>Colorado limited liability company · EIN 41-5282672</p></div>
+        <div><b>Member-managed, 50/50</b><p>Alec Ehli, co-founder · Nicholas Rutherford, co-founder</p></div>
+        <div><b>Stage</b><p>Pre-lease. Validating demand ahead of any land commitment.</p></div>
+        <div><b>Focus</b><p>Secure parking, EV charging, and fleet depot services — DIA corridor, Aurora, Colorado.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div style="max-width:300px;">
+        <img src="logo-full.png" alt="Aurora CyberHub" loading="lazy">
+        <p>Overnight EV charging and secure parking for the Denver International Airport corridor.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <a href="#lot">The lot</a>
+        <a href="#access">Access</a>
+        <a href="#plans">Plans</a>
+        <a href="#reserve">Reserve</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#fleet">Fleet &amp; depot</a>
+        <a href="#investors">Investors</a>
+        <a href="mailto:info@auroracyberhub.com">info@auroracyberhub.com</a>
+      </div>
+    </div>
+    <p class="legal">© <span id="year"></span> Aurora CyberHub LLC. All rights reserved. Prices shown are estimates and not an offer; final rates will be published before any charge is made. Site plan is conceptual and subject to survey, engineering, and municipal approval. Tesla, Cybercab, Supercharger and related marks are trademarks of Tesla, Inc.; Aurora CyberHub LLC is an independent company and is not affiliated with, endorsed by, or a partner of Tesla, Inc.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', function(){ mobileMenu.classList.toggle('open'); });
+  Array.prototype.forEach.call(mobileMenu.querySelectorAll('a'), function(a){
+    a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); });
+  });
+
+  var MEMBERSHIP = 379;
+  var kwh = document.getElementById('kwh'), rate = document.getElementById('rate');
+  var kwhOut = document.getElementById('kwhOut'), rateOut = document.getElementById('rateOut');
+  var superOut = document.getElementById('superOut'), hubOut = document.getElementById('hubOut');
+  var superBar = document.getElementById('superBar'), hubBar = document.getElementById('hubBar');
+  var vNum = document.getElementById('verdictNum'), vText = document.getElementById('verdictText');
+
+  function money(n){ return '$' + Math.round(n).toLocaleString(); }
+
+  function run(){
+    var k = parseInt(kwh.value,10), r = parseFloat(rate.value), sc = k*r;
+    kwhOut.textContent = k.toLocaleString();
+    rateOut.textContent = r.toFixed(2);
+    superOut.textContent = money(sc);
+    hubOut.textContent = money(MEMBERSHIP);
+    var max = Math.max(sc, MEMBERSHIP, 1);
+    superBar.style.width = (sc/max*100) + '%';
+    hubBar.style.width = (MEMBERSHIP/max*100) + '%';
+    var diff = sc - MEMBERSHIP;
+    if (diff > 15){
+      vNum.className = 'verdict-num';
+      vNum.textContent = money(diff) + '/mo saved';
+      vText.textContent = 'That\u2019s ' + money(diff*12) + ' a year \u2014 and it comes with a gated stall and a monthly detail on top.';
+    } else if (diff >= -15){
+      vNum.className = 'verdict-num neutral';
+      vNum.textContent = 'About even';
+      vText.textContent = 'Roughly what you already spend on charging \u2014 except now the stall, the security, and a monthly detail come with it.';
+    } else {
+      vNum.className = 'verdict-num neutral';
+      vNum.textContent = money(-diff) + '/mo more';
+      vText.textContent = 'At your usage, charging alone is cheaper on the road. Membership makes sense if you also need somewhere secure to park \u2014 or start with Secure Park at ~$199.';
+    }
+  }
+  ['input','change'].forEach(function(ev){
+    kwh.addEventListener(ev, run);
+    rate.addEventListener(ev, run);
+  });
+  run();
+
+  function wire(formId, okId){
+    var form = document.getElementById(formId), ok = document.getElementById(okId);
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Sending\u2026';
+      fetch(form.action, { method:'POST', body:new FormData(form), headers:{'Accept':'application/json'} })
+      .then(function(res){
+        if(res.ok){ form.style.display='none'; ok.style.display='block'; }
+        else { btn.disabled=false; btn.textContent='Try again'; }
+      }).catch(function(){ btn.disabled=false; btn.textContent='Try again'; });
+    });
+  }
+  wire('foundingForm','fm-ok');
+  wire('waitlistForm','wl-ok');
+  wire('fleetForm','fl-ok');
+</script>
+
+</body>
+</html>
