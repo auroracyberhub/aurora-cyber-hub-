@@ -100,30 +100,30 @@
   .calc label{display:flex; justify-content:space-between; align-items:baseline; font-size:0.88rem; color:var(--muted); margin-bottom:6px;}
   .calc label b{font-family:'JetBrains Mono',monospace; color:var(--bone); font-size:1.02rem; font-weight:500;}
 
-  input[type=range]{
-    -webkit-appearance:none; appearance:none;
-    width:100%; height:36px; background:transparent;
-    outline:none; margin:0; padding:0; cursor:pointer;
-    touch-action:none;
+  .ctl{margin-bottom:20px;}
+  .stepper{display:flex; align-items:stretch; gap:10px; margin-bottom:10px;}
+  .stepper button{
+    flex:0 0 54px; height:54px; font-size:1.6rem; line-height:1;
+    background:var(--asphalt-3); color:var(--bone);
+    border:1px solid var(--rule-2); border-radius:3px;
+    font-family:'Archivo',sans-serif; font-weight:700; cursor:pointer;
+    -webkit-tap-highlight-color:transparent; touch-action:manipulation;
   }
-  input[type=range]::-webkit-slider-runnable-track{
-    height:4px; background:var(--asphalt-3); border-radius:2px; border:none;
+  .stepper button:active{background:var(--sodium); color:#1A1206;}
+  .stepper .val{
+    flex:1; display:flex; align-items:center; justify-content:center;
+    background:var(--asphalt); border:1px solid var(--rule-2); border-radius:3px;
+    font-family:'JetBrains Mono',monospace; font-size:1.25rem; color:var(--bone);
   }
-  input[type=range]::-webkit-slider-thumb{
-    -webkit-appearance:none; appearance:none;
-    width:26px; height:26px; border-radius:50%; margin-top:-11px;
-    background:var(--sodium); cursor:pointer;
-    border:3px solid var(--asphalt-2); box-shadow:0 0 0 1px var(--sodium);
+  .chips{display:flex; gap:7px; flex-wrap:wrap;}
+  .chip{
+    flex:1 1 auto; min-width:64px; padding:9px 8px;
+    background:transparent; color:var(--muted);
+    border:1px solid var(--rule-2); border-radius:3px;
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; cursor:pointer;
+    -webkit-tap-highlight-color:transparent; touch-action:manipulation;
   }
-  input[type=range]::-moz-range-track{
-    height:4px; background:var(--asphalt-3); border-radius:2px; border:none;
-  }
-  input[type=range]::-moz-range-thumb{
-    width:26px; height:26px; border-radius:50%;
-    background:var(--sodium); cursor:pointer;
-    border:3px solid var(--asphalt-2); box-shadow:0 0 0 1px var(--sodium);
-  }
-  input[type=range]:active::-webkit-slider-thumb{transform:scale(1.08);}
+  .chip:active, .chip.on{background:var(--sodium); color:#1A1206; border-color:var(--sodium);}
 
   .scale{display:flex; justify-content:space-between; font-family:'JetBrains Mono',monospace; font-size:0.65rem; color:var(--muted); margin-bottom:20px;}
   .bar-row{margin-bottom:16px;}
@@ -256,13 +256,36 @@
       <div class="calc">
         <div class="calc-head"><span>Run your numbers</span><span>Monthly</span></div>
 
-        <label for="kwh">Electricity you use each month <b><span id="kwhOut">850</span> kWh</b></label>
-        <input type="range" id="kwh" min="150" max="1600" step="25" value="850" aria-label="Monthly kilowatt-hours">
-        <div class="scale"><span>150</span><span>light</span><span>heavy</span><span>1600 kWh</span></div>
+        <div class="ctl">
+          <label>Electricity you use each month</label>
+          <div class="stepper">
+            <button type="button" id="kwhDown" aria-label="Less energy">&minus;</button>
+            <div class="val"><span id="kwhOut">850</span>&nbsp;kWh</div>
+            <button type="button" id="kwhUp" aria-label="More energy">+</button>
+          </div>
+          <div class="chips">
+            <button type="button" class="chip" data-kwh="400">Light</button>
+            <button type="button" class="chip" data-kwh="650">Part&nbsp;time</button>
+            <button type="button" class="chip on" data-kwh="850">Full&nbsp;time</button>
+            <button type="button" class="chip" data-kwh="1200">Heavy</button>
+          </div>
+        </div>
 
-        <label for="rate">What you pay at fast chargers <b>$<span id="rateOut">0.45</span>/kWh</b></label>
-        <input type="range" id="rate" min="0.25" max="0.60" step="0.01" value="0.45" aria-label="Fast charging rate per kilowatt hour">
-        <div class="scale"><span>$0.25</span><span>Denver range</span><span>$0.60</span></div>
+        <div class="ctl">
+          <label>What you pay at fast chargers</label>
+          <div class="stepper">
+            <button type="button" id="rateDown" aria-label="Lower rate">&minus;</button>
+            <div class="val">$<span id="rateOut">0.45</span>&nbsp;/kWh</div>
+            <button type="button" id="rateUp" aria-label="Higher rate">+</button>
+          </div>
+          <div class="chips">
+            <button type="button" class="chip" data-rate="0.35">$0.35</button>
+            <button type="button" class="chip" data-rate="0.40">$0.40</button>
+            <button type="button" class="chip on" data-rate="0.45">$0.45</button>
+            <button type="button" class="chip" data-rate="0.50">$0.50</button>
+            <button type="button" class="chip" data-rate="0.55">$0.55</button>
+          </div>
+        </div>
 
         <div class="bar-row bar-super">
           <div class="bar-label"><span>Fast charging today</span><span id="superOut">$383</span></div>
@@ -275,7 +298,7 @@
 
         <div class="verdict">
           <div class="verdict-num" id="verdictNum">—</div>
-          <p id="verdictText">Drag the sliders to see where you land.</p>
+          <p id="verdictText">Tap the presets or use plus and minus.</p>
         </div>
 
         <p class="calc-fine">Denver-area fast charging runs roughly $0.35–$0.50/kWh, and Colorado sits at the higher end of Tesla's regional pricing. Membership shown at the estimated $379 Park&nbsp;+&nbsp;Charge rate, which also includes a gated stall and one detail per month. Overnight Level&nbsp;2 covers roughly 70–80&nbsp;kWh a night — enough for most driving days, but a heavy day or a cold week may still need a top-up on the road, so treat this as a large reduction in your charging bill rather than the end of it. Estimates only; your rate and usage will differ.</p>
@@ -614,18 +637,34 @@
   });
 
   var MEMBERSHIP = 379;
-  var kwh = document.getElementById('kwh'), rate = document.getElementById('rate');
+  var kwhVal = 850, rateVal = 0.45;
+  var KWH_MIN = 150, KWH_MAX = 1600, KWH_STEP = 50;
+  var RATE_MIN = 0.25, RATE_MAX = 0.60, RATE_STEP = 0.01;
+
   var kwhOut = document.getElementById('kwhOut'), rateOut = document.getElementById('rateOut');
   var superOut = document.getElementById('superOut'), hubOut = document.getElementById('hubOut');
   var superBar = document.getElementById('superBar'), hubBar = document.getElementById('hubBar');
   var vNum = document.getElementById('verdictNum'), vText = document.getElementById('verdictText');
 
   function money(n){ return '$' + Math.round(n).toLocaleString(); }
+  function clamp(v, lo, hi){ return Math.min(hi, Math.max(lo, v)); }
+
+  function markChips(){
+    var chips = document.querySelectorAll('.chip');
+    for (var i=0; i<chips.length; i++){
+      var el = chips[i];
+      if (el.hasAttribute('data-kwh')){
+        el.className = (parseInt(el.getAttribute('data-kwh'),10) === kwhVal) ? 'chip on' : 'chip';
+      } else if (el.hasAttribute('data-rate')){
+        el.className = (Math.abs(parseFloat(el.getAttribute('data-rate')) - rateVal) < 0.001) ? 'chip on' : 'chip';
+      }
+    }
+  }
 
   function run(){
-    var k = parseInt(kwh.value,10), r = parseFloat(rate.value), sc = k*r;
-    kwhOut.textContent = k.toLocaleString();
-    rateOut.textContent = r.toFixed(2);
+    var sc = kwhVal * rateVal;
+    kwhOut.textContent = kwhVal.toLocaleString();
+    rateOut.textContent = rateVal.toFixed(2);
     superOut.textContent = money(sc);
     hubOut.textContent = money(MEMBERSHIP);
     var max = Math.max(sc, MEMBERSHIP, 1);
@@ -645,11 +684,27 @@
       vNum.textContent = money(-diff) + '/mo more';
       vText.textContent = 'At your usage, charging alone is cheaper on the road. Membership makes sense if you also need somewhere secure to park \u2014 or start with Secure Park at ~$199.';
     }
+    markChips();
   }
-  ['input','change'].forEach(function(ev){
-    kwh.addEventListener(ev, run);
-    rate.addEventListener(ev, run);
-  });
+
+  function on(id, fn){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('click', fn);
+  }
+  on('kwhUp',   function(){ kwhVal  = clamp(kwhVal + KWH_STEP, KWH_MIN, KWH_MAX); run(); });
+  on('kwhDown', function(){ kwhVal  = clamp(kwhVal - KWH_STEP, KWH_MIN, KWH_MAX); run(); });
+  on('rateUp',  function(){ rateVal = clamp(Math.round((rateVal + RATE_STEP)*100)/100, RATE_MIN, RATE_MAX); run(); });
+  on('rateDown',function(){ rateVal = clamp(Math.round((rateVal - RATE_STEP)*100)/100, RATE_MIN, RATE_MAX); run(); });
+
+  var allChips = document.querySelectorAll('.chip');
+  for (var i=0; i<allChips.length; i++){
+    allChips[i].addEventListener('click', function(){
+      if (this.hasAttribute('data-kwh'))  kwhVal  = parseInt(this.getAttribute('data-kwh'),10);
+      if (this.hasAttribute('data-rate')) rateVal = parseFloat(this.getAttribute('data-rate'));
+      run();
+    });
+  }
+
   run();
 
   function wire(formId, okId){
